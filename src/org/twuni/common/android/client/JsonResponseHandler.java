@@ -18,7 +18,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonParseException;
 
-public final class JsonResponseHandler<T, E> implements ResponseHandler<T> {
+public class JsonResponseHandler<T, E> implements ResponseHandler<T> {
 
 	private final Gson gson = new GsonBuilder().disableHtmlEscaping().create();
 	private final Type typeOfT;
