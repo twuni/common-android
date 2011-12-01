@@ -1,5 +1,11 @@
 package org.twuni.common.android.record;
 
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 
@@ -35,6 +41,33 @@ public abstract class Record<T> {
 
 	protected String getString( Object key ) {
 		return preferences.getString( key.toString(), null );
+	}
+
+	protected Set<String> getSet( Object key ) {
+		return new HashSet<String>( getList( key ) );
+	}
+
+	protected List<String> getList( Object key ) {
+		return Arrays.asList( getStringArray( key ) );
+	}
+
+	protected String [] getStringArray( Object key ) {
+		return getString( key ).split( "," );
+	}
+
+	protected String toString( Collection<?> collection ) {
+		return toString( collection.toArray() );
+	}
+
+	protected String toString( Object [] array ) {
+		StringBuilder string = new StringBuilder();
+		for( int index = 0; index < array.length; index++ ) {
+			if( index > 0 ) {
+				string.append( "," );
+			}
+			string.append( array[index] );
+		}
+		return string.toString();
 	}
 
 	public abstract T load();
