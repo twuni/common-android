@@ -31,12 +31,12 @@ public abstract class ListAdapter<T, V extends View> extends BaseAdapter {
 
 	@Override
 	public Object getItem( int position ) {
-		return items.get( position );
+		return items.get( position % items.size() );
 	}
 
 	@Override
 	public long getItemId( int position ) {
-		return getItem( position ).hashCode();
+		return getItem( position % items.size() ).hashCode();
 	}
 
 	public List<T> getItems() {
@@ -52,7 +52,7 @@ public abstract class ListAdapter<T, V extends View> extends BaseAdapter {
 	public View getView( int position, View convertView, ViewGroup parent ) {
 
 		V targetView = getTargetView( convertView, parent );
-		T item = items.get( position );
+		T item = items.get( position % items.size() );
 
 		adapt( item, targetView );
 
